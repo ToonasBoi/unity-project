@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -88,7 +88,7 @@ public class PlayerMovement : MonoBehaviour
         {
             return;
         }
-        if (Gamepad.current == null)
+        if(Gamepad.current == null)
         {
             return;
         }
@@ -115,7 +115,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (Gamepad.current.leftShoulder.wasReleasedThisFrame && !isWallSliding && IsGrounded())
         {
-            if (megaJumpCounter < 0f && megaJumping)
+            if(megaJumpCounter < 0f && megaJumping)
             {
                 MegaJump();
             }
@@ -123,11 +123,11 @@ public class PlayerMovement : MonoBehaviour
             anim.SetBool("MegaJumpDone", false);
             megaJumping = false;
         }
-        if (megaJumping && megaJumpCounter < 0f)
+        if(megaJumping && megaJumpCounter < 0f)
         {
             anim.SetBool("MegaJumpDone", true);
         }
-        if (megaJumpCounter >= 0f)
+        if(megaJumpCounter >= 0f)
         {
             megaJumpCounter -= Time.deltaTime;
         }
@@ -148,7 +148,7 @@ public class PlayerMovement : MonoBehaviour
                 moveInput.x = 0f;
             }
         }
-        if (jumpBufferCounter > 0f)
+        if(jumpBufferCounter > 0f)
         {
             if (coyotejumpCounter > 0f)
             {
@@ -185,7 +185,7 @@ public class PlayerMovement : MonoBehaviour
             coyotejumpCounter = coyoteJumpTime;
             dashed = false;
         }
-        if (coyotejumpCounter > 0f)
+        if(coyotejumpCounter > 0f)
         {
             coyotejumpCounter -= Time.deltaTime;
         }
@@ -226,7 +226,7 @@ public class PlayerMovement : MonoBehaviour
     private void WallSlide()
     {
         //Wallslide
-        if (IsWalled() && !IsGrounded() && (moveInput.x < -0.1f || moveInput.x > 0.1f))
+        if(IsWalled() && !IsGrounded() && (moveInput.x < -0.1f || moveInput.x > 0.1f))
         {
             isWallSliding = true;
             dashed = false;
@@ -239,14 +239,14 @@ public class PlayerMovement : MonoBehaviour
     }
     private void WallJumpActivator()
     {
-        if (isWallSliding == true)
+        if(isWallSliding == true)
         {
             isWalljumping = false;
             walljumpingDirection = -transform.localScale.x;
             wallJumpingCounter = wallJumpingTime;
             CancelInvoke(nameof(StopWallJumping));
         }
-        else if (wallJumpingCounter > 0f)
+        else if(wallJumpingCounter > 0f)
         {
             wallJumpingCounter -= Time.deltaTime;
         }
@@ -263,11 +263,11 @@ public class PlayerMovement : MonoBehaviour
             localscale.x *= -1f;
             transform.localScale = localscale;
         }
-        Invoke(nameof(StopWallJumping), walljumpingDuration);
+        Invoke(nameof(StopWallJumping), walljumpingDuration); 
     }
     private bool IsGrounded()
     {
-        if (Physics2D.OverlapCircle(new Vector2(feet.position.x - 0.2f, feet.position.y), 0.2f, ground))
+        if(Physics2D.OverlapCircle(new Vector2(feet.position.x -0.2f, feet.position.y), 0.2f, ground))
         {
             return true;
         }
